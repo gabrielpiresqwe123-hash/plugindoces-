@@ -66,7 +66,7 @@ A maioria nem tem coragem de clicar no botão, mas você já tá aqui.
   },
   {
     id: 3,
-    title: "🎯 Pergunta 1 – Ciclo da Estagnação",
+    title: "Pergunta 1 – Ciclo da Estagnação",
     content: `💭 **"{userName}, o que faz mais sentido pra você hoje?"**
 
 🤔 Escolha com sabedoria, {userName}... sua resposta revela muito sobre seu futuro! ⭐`,
@@ -90,7 +90,7 @@ A maioria nem tem coragem de clicar no botão, mas você já tá aqui.
   },
   {
     id: 4,
-    title: "⏳ Pergunta 2 – Tempo de Família",
+    title: "Pergunta 2 – Tempo de Família",
     content: `💝 **"{userName}, se você tivesse que escolher… o que pesa mais?"**
 
 👨‍👩‍👧‍👦 Sua família está esperando por você, {userName}... ⭐`,
@@ -114,7 +114,7 @@ A maioria nem tem coragem de clicar no botão, mas você já tá aqui.
   },
   {
     id: 5,
-    title: "🔮 Pergunta 3 – Futuro da Confeitaria",
+    title: "Pergunta 3 – Futuro da Confeitaria",
     content: `🚀 **"{userName}, se nada mudar nos próximos 6 meses, onde você acha que vai estar?"**
 
 ⏰ O tempo não para, {userName}... e você? ⭐`,
@@ -451,20 +451,20 @@ export default function ConfeitariaPremium() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="bg-black border-b-2 border-yellow-500 p-4 shadow-lg shadow-yellow-500/20">
+      <header className="bg-black border-b-2 border-yellow-500 p-2 sm:p-4 shadow-lg shadow-yellow-500/20">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 bg-[#1877F2] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">f</span>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-[#1877F2] rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-xs sm:text-sm">f</span>
             </div>
-            <h1 className="text-xl font-bold text-[#1877F2]">Facebook</h1>
+            <h1 className="text-sm sm:text-xl font-bold text-[#1877F2]">Facebook</h1>
           </div>
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-white">✨ Confeitaria Premium™ ✨</h2>
+            <h2 className="text-xs sm:text-lg font-semibold text-white">✨ Confeitaria Premium™ ✨</h2>
           </div>
-          <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-600 px-4 py-2 rounded-full border-2 border-yellow-400 shadow-lg">
-            <Coins className="w-5 h-5 text-white" />
-            <span className="font-bold text-white">{balance.toLocaleString()} CoinX</span>
+          <div className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-yellow-400 to-yellow-600 px-2 sm:px-4 py-1 sm:py-2 rounded-full border-2 border-yellow-400 shadow-lg">
+            <Coins className="w-3 h-3 sm:w-5 sm:h-5 text-white" />
+            <span className="font-bold text-white text-xs sm:text-base">{balance.toLocaleString()}</span>
           </div>
         </div>
       </header>
@@ -482,7 +482,7 @@ export default function ConfeitariaPremium() {
       )}
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto p-6">
+      <main className="max-w-4xl mx-auto p-2 sm:p-6">
         {currentStepData && (
           <Card
             className={`bg-gray-900 border-2 ${
@@ -496,27 +496,30 @@ export default function ConfeitariaPremium() {
             <div className="absolute bottom-0 left-0 w-16 h-16 border-l-4 border-b-4 border-yellow-500"></div>
             <div className="absolute bottom-0 right-0 w-16 h-16 border-r-4 border-b-4 border-yellow-500"></div>
 
-            <CardContent className="p-8 relative z-10">
+            <CardContent className="p-3 sm:p-8 relative z-10">
               {/* Step Header */}
-              <div className="flex items-center justify-between mb-6">
-                <Badge variant="outline" className="text-white border-[#1877F2] bg-[#1877F2] px-4 py-2 font-semibold">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <Badge
+                  variant="outline"
+                  className="text-white border-[#1877F2] bg-[#1877F2] px-2 sm:px-4 py-1 sm:py-2 font-semibold text-xs sm:text-base"
+                >
                   ⭐ Etapa {currentStep} de {steps.length} ⭐
                 </Badge>
                 {currentStepData.isPopup && (
-                  <div className="flex items-center gap-2">
-                    <Trophy className="w-8 h-8 text-yellow-500 animate-pulse" />
-                    <Sparkles className="w-6 h-6 text-yellow-400" />
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                    <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400" />
                   </div>
                 )}
               </div>
 
               {/* Title */}
-              <h2 className="text-3xl font-bold mb-8 text-center text-balance text-white bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+              <h2 className="text-lg sm:text-3xl font-bold mb-4 sm:mb-8 text-center text-balance text-white bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent px-2">
                 💎 Método Confeitaria Gold - {currentStepData.title}
               </h2>
 
               {currentStep === 1 && (
-                <div className="mb-8 text-center">
+                <div className="mb-4 sm:mb-8 text-center">
                   <img
                     src="/confeitaria-premium.png"
                     alt="Método Confeitaria Premium"
@@ -526,8 +529,8 @@ export default function ConfeitariaPremium() {
               )}
 
               {/* Content */}
-              <div className="prose prose-invert max-w-none mb-8">
-                <div className="whitespace-pre-line text-sm sm:text-base md:text-lg leading-relaxed text-gray-100 break-words hyphens-auto overflow-wrap-anywhere">
+              <div className="prose prose-invert max-w-none mb-4 sm:mb-8">
+                <div className="whitespace-pre-line text-xs sm:text-base md:text-lg leading-relaxed text-gray-100 break-words hyphens-auto overflow-wrap-anywhere px-2 sm:px-0">
                   {currentStepData.isLong ? (
                     <>
                       {displayedText}
@@ -541,16 +544,16 @@ export default function ConfeitariaPremium() {
 
               {/* Step 1 - Name Input */}
               {currentStep === 1 && !isTyping && (
-                <div className="space-y-6 border-2 border-yellow-500/30 rounded-lg p-6 bg-gradient-to-r from-gray-800/50 to-gray-700/50">
-                  <div className="text-center mb-4">
-                    <Heart className="w-8 h-8 text-pink-500 mx-auto animate-pulse" />
+                <div className="space-y-4 sm:space-y-6 border-2 border-yellow-500/30 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-gray-800/50 to-gray-700/50">
+                  <div className="text-center mb-2 sm:mb-4">
+                    <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500 mx-auto animate-pulse" />
                   </div>
                   <Input
                     type="text"
                     placeholder="✨ Digite seu nome completo aqui..."
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className="bg-gray-800 border-2 border-yellow-500/50 text-white text-lg p-4 focus:border-yellow-500 transition-all"
+                    className="bg-gray-800 border-2 border-yellow-500/50 text-white text-sm sm:text-lg p-2 sm:p-4 focus:border-yellow-500 transition-all"
                     onKeyPress={(e) => {
                       if (e.key === "Enter" && userName.trim().length >= 2) {
                         handleNextStep()
@@ -561,7 +564,7 @@ export default function ConfeitariaPremium() {
                   <Button
                     onClick={handleNextStep}
                     disabled={userName.trim().length < 2}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-6 text-xl border-2 border-pink-400 shadow-lg hover:shadow-pink-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-3 sm:py-6 text-sm sm:text-xl border-2 border-pink-400 shadow-lg hover:shadow-pink-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     🍓 QUERO DESCOBRIR AGORA ✨
                   </Button>
@@ -570,35 +573,40 @@ export default function ConfeitariaPremium() {
 
               {/* Options for question steps */}
               {currentStepData.options && !showFeedback && (
-                <div className="space-y-3 sm:space-y-4">
+                <div className="space-y-2 sm:space-y-4">
+                  {/* Improved mobile layout for chef animations */}
                   {currentStep === 3 && (
-                    <div className="text-center mb-4 sm:mb-6">
+                    <div className="text-center mb-3 sm:mb-6">
                       <div className="relative inline-block">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-4 border-yellow-300 shadow-2xl animate-pulse">
-                          <span className="text-2xl sm:text-3xl">👩‍🍳</span>
+                        <div className="w-12 h-12 sm:w-20 sm:h-20 mx-auto mb-2 sm:mb-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-4 border-yellow-300 shadow-2xl animate-pulse">
+                          <span className="text-lg sm:text-3xl">👩‍🍳</span>
                         </div>
-                        <div className="absolute -top-2 -right-2 w-6 h-6 sm:w-8 sm:h-8 bg-red-500 rounded-full flex items-center justify-center animate-bounce">
+                        <div className="absolute -top-1 -right-1 w-4 h-4 sm:w-8 sm:h-8 bg-red-500 rounded-full flex items-center justify-center animate-bounce">
                           <span className="text-white text-xs font-bold">🔥</span>
                         </div>
                       </div>
-                      <div className="text-yellow-400 font-bold text-sm sm:text-lg mb-2">⚡ CHEF PREMIUM MODE ⚡</div>
+                      <div className="text-yellow-400 font-bold text-xs sm:text-lg mb-1 sm:mb-2">
+                        ⚡ CHEF PREMIUM MODE ⚡
+                      </div>
                     </div>
                   )}
 
                   {currentStep === 4 && (
-                    <div className="text-center mb-4 sm:mb-6">
+                    <div className="text-center mb-3 sm:mb-6">
                       <div className="relative inline-block">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 bg-gradient-to-br from-pink-400 to-red-500 rounded-full flex items-center justify-center border-4 border-pink-300 shadow-2xl animate-pulse">
-                          <span className="text-2xl sm:text-3xl">🍰</span>
+                        <div className="w-12 h-12 sm:w-20 sm:h-20 mx-auto mb-2 sm:mb-4 bg-gradient-to-br from-pink-400 to-red-500 rounded-full flex items-center justify-center border-4 border-pink-300 shadow-2xl animate-pulse">
+                          <span className="text-lg sm:text-3xl">🍰</span>
                         </div>
-                        <div className="absolute -top-1 -left-1 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center animate-spin">
+                        <div className="absolute -top-1 -left-1 w-3 h-3 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center animate-spin">
                           <span className="text-white text-xs">⭐</span>
                         </div>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
+                        <div className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
                           <span className="text-white text-xs">💎</span>
                         </div>
                       </div>
-                      <div className="text-pink-400 font-bold text-sm sm:text-lg mb-2">🍰 FAMÍLIA & CONFEITARIA 🍰</div>
+                      <div className="text-pink-400 font-bold text-xs sm:text-lg mb-1 sm:mb-2">
+                        🍰 FAMÍLIA & CONFEITARIA 🍰
+                      </div>
                     </div>
                   )}
 
@@ -607,15 +615,15 @@ export default function ConfeitariaPremium() {
                       key={index}
                       onClick={() => handleOptionSelect(option.text, option.feedback)}
                       variant="outline"
-                      className="w-full text-left p-3 sm:p-4 md:p-6 h-auto bg-gray-800 border-2 border-yellow-500/30 hover:bg-gray-700 hover:border-yellow-500 text-white transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20"
+                      className="w-full text-left p-2 sm:p-4 md:p-6 h-auto bg-gray-800 border-2 border-yellow-500/30 hover:bg-gray-700 hover:border-yellow-500 text-white transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20"
                     >
                       <div className="flex items-start gap-2 sm:gap-3 w-full">
                         <div className="flex-shrink-0 mt-1">
-                          {index === 0 && <Target className="w-4 h-4 sm:w-5 sm:h-5 text-red-400" />}
-                          {index === 1 && <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />}
-                          {index === 2 && <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />}
+                          {index === 0 && <Target className="w-3 h-3 sm:w-5 sm:h-5 text-red-400" />}
+                          {index === 1 && <Star className="w-3 h-3 sm:w-5 sm:h-5 text-yellow-400" />}
+                          {index === 2 && <Zap className="w-3 h-3 sm:w-5 sm:h-5 text-blue-400" />}
                         </div>
-                        <span className="text-xs sm:text-sm md:text-base leading-relaxed break-words flex-1 hyphens-auto overflow-wrap-anywhere">
+                        <span className="text-xs sm:text-sm md:text-base leading-relaxed break-words flex-1 hyphens-auto overflow-wrap-anywhere word-break-break-word">
                           {option.text}
                         </span>
                       </div>
@@ -626,11 +634,11 @@ export default function ConfeitariaPremium() {
 
               {/* Feedback */}
               {showFeedback && selectedOption && (
-                <div className="space-y-4 sm:space-y-6">
-                  <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-3 sm:p-4 md:p-6 rounded-lg border-l-4 border-[#1877F2] border-2 border-yellow-500/30 shadow-lg">
+                <div className="space-y-3 sm:space-y-6">
+                  <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-2 sm:p-4 md:p-6 rounded-lg border-l-4 border-[#1877F2] border-2 border-yellow-500/30 shadow-lg">
                     <div className="flex items-start gap-2 sm:gap-3">
-                      <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 flex-shrink-0 mt-1" />
-                      <p className="text-xs sm:text-sm md:text-lg leading-relaxed text-gray-100 break-words flex-1 hyphens-auto overflow-wrap-anywhere">
+                      <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400 flex-shrink-0 mt-1" />
+                      <p className="text-xs sm:text-sm md:text-lg leading-relaxed text-gray-100 break-words flex-1 hyphens-auto overflow-wrap-anywhere word-break-break-word">
                         {currentStepData.options
                           ?.find((opt) => opt.text === selectedOption)
                           ?.feedback.replace(/{userName}/g, userName || "")}
@@ -639,7 +647,7 @@ export default function ConfeitariaPremium() {
                   </div>
                   <Button
                     onClick={handleNextStep}
-                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 sm:py-6 px-4 sm:px-8 text-lg sm:text-xl border-2 border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 sm:py-6 px-2 sm:px-8 text-sm sm:text-xl border-2 border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-all duration-300"
                   >
                     🚀 CONTINUAR JORNADA ✨
                   </Button>
@@ -648,13 +656,13 @@ export default function ConfeitariaPremium() {
 
               {/* Popup steps */}
               {currentStepData.isPopup && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-6 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10">
-                  <div className="mb-4">
-                    <Crown className="w-12 h-12 text-yellow-500 mx-auto animate-bounce" />
+                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10">
+                  <div className="mb-2 sm:mb-4">
+                    <Crown className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-500 mx-auto animate-bounce" />
                   </div>
                   <Button
                     onClick={handleNextStep}
-                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 text-xl border-2 border-green-400 shadow-lg hover:shadow-green-500/50 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 sm:py-6 px-2 sm:px-8 text-sm sm:text-xl border-2 border-green-400 shadow-lg hover:shadow-green-500/50 transition-all duration-300"
                   >
                     {currentStep === 2 ? "🚀 COMEÇAR AGORA ✨" : "💎 QUERO MÉTODO COMPLETO 🎯"}
                   </Button>
@@ -663,19 +671,19 @@ export default function ConfeitariaPremium() {
 
               {/* Step 7 - Final CTA */}
               {currentStep === 7 && !isTyping && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-4 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
-                  <div className="mb-4">
-                    <div className="flex justify-center gap-2">
-                      <Crown className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
-                      <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
-                      <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
+                  <div className="mb-2 sm:mb-4">
+                    <div className="flex justify-center gap-1 sm:gap-2">
+                      <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                      <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
+                      <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
                     </div>
                   </div>
                   <Button
                     onClick={handleNextStep}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-6 sm:py-8 px-2 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
                   >
-                    <span className="text-sm sm:text-lg md:text-xl leading-tight">
+                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
                       🍓 QUERO VIVER DA CONFEITARIA PREMIUM ✨
                     </span>
                   </Button>
@@ -684,20 +692,20 @@ export default function ConfeitariaPremium() {
 
               {/* Step 8 - Final Celebration */}
               {currentStep === 8 && !isTyping && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-4 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
-                  <div className="mb-4 sm:mb-6">
-                    <div className="flex justify-center gap-2 mb-4">
-                      <Crown className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
-                      <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
-                      <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
+                  <div className="mb-3 sm:mb-6">
+                    <div className="flex justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
+                      <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                      <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
+                      <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
                     </div>
-                    <div className="text-xl sm:text-2xl mb-4">🎉🎁🎊</div>
+                    <div className="text-lg sm:text-2xl mb-2 sm:mb-4">🎉🎁🎊</div>
                   </div>
                   <Button
                     onClick={handleNextStep}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-6 sm:py-8 px-2 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
                   >
-                    <span className="text-sm sm:text-sm md:text-lg lg:text-xl leading-tight">
+                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
                       🍓 ACESSAR MEU RELATÓRIO E MÉTODO PREMIUM ✨
                     </span>
                   </Button>
@@ -706,30 +714,30 @@ export default function ConfeitariaPremium() {
 
               {/* Step 9 - Final Celebration */}
               {currentStep === 9 && !isTyping && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-4 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
-                  <div className="mb-6 sm:mb-8">
+                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
+                  <div className="mb-4 sm:mb-8">
                     <img
                       src="/confeitaria-premium-final.png"
                       alt="Método Confeitaria Premium - Transformação Completa"
-                      className="w-full max-w-sm sm:max-w-lg mx-auto rounded-lg border-2 border-yellow-500 shadow-2xl shadow-yellow-500/30"
+                      className="w-full max-w-xs sm:max-w-lg mx-auto rounded-lg border-2 border-yellow-500 shadow-2xl shadow-yellow-500/30"
                     />
                   </div>
-                  <div className="mb-4 sm:mb-6">
-                    <div className="flex justify-center gap-2 mb-4">
-                      <Crown className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
-                      <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
-                      <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+                  <div className="mb-3 sm:mb-6">
+                    <div className="flex justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
+                      <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                      <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
+                      <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
                     </div>
-                    <div className="text-xl sm:text-2xl mb-4">🎉🎁🎊</div>
+                    <div className="text-lg sm:text-2xl mb-2 sm:mb-4">🎉🎁🎊</div>
                   </div>
                   <Button
                     onClick={() => {
                       playButtonSound()
                       window.open("https://pay.kiwify.com.br/yHioiZU", "_blank")
                     }}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-6 sm:py-8 px-2 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
                   >
-                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight">
+                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
                       🍓 ACESSAR MEU RELATÓRIO E MÉTODO PREMIUM ✨
                     </span>
                   </Button>
@@ -765,24 +773,37 @@ export default function ConfeitariaPremium() {
         {(currentStep === 8 || currentStep === 9) && (
           <>
             <div
-              className="fixed inset-0 pointer-events-none z-40 animate-pulse"
-              style={{ animationDuration: "2s", animationIterationCount: "1" }}
+              className="fixed inset-0 pointer-events-none z-40"
+              style={{
+                animation: "pulse 2s ease-in-out 1",
+              }}
             >
               <div
-                className="absolute top-10 left-10 w-3 h-3 sm:w-4 sm:h-4 bg-yellow-400 rounded-full animate-ping"
-                style={{ animationDuration: "2s", animationIterationCount: "1" }}
+                className="absolute top-10 left-10 w-2 h-2 sm:w-4 sm:h-4 bg-yellow-400 rounded-full"
+                style={{
+                  animation: "ping 2s cubic-bezier(0, 0, 0.2, 1) 1",
+                }}
               ></div>
               <div
-                className="absolute top-20 right-20 w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full animate-ping"
-                style={{ animationDelay: "0.5s", animationDuration: "1.5s", animationIterationCount: "1" }}
+                className="absolute top-20 right-20 w-1 h-1 sm:w-3 sm:h-3 bg-red-400 rounded-full"
+                style={{
+                  animationDelay: "0.5s",
+                  animation: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) 1",
+                }}
               ></div>
               <div
-                className="absolute top-32 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-ping"
-                style={{ animationDelay: "1s", animationDuration: "1s", animationIterationCount: "1" }}
+                className="absolute top-32 left-1/4 w-1 h-1 sm:w-2 sm:h-2 bg-blue-400 rounded-full"
+                style={{
+                  animationDelay: "1s",
+                  animation: "ping 1s cubic-bezier(0, 0, 0.2, 1) 1",
+                }}
               ></div>
               <div
-                className="absolute top-16 right-1/3 w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-ping"
-                style={{ animationDelay: "1.5s", animationDuration: "0.5s", animationIterationCount: "1" }}
+                className="absolute top-16 right-1/3 w-1 h-1 sm:w-3 sm:h-3 bg-green-400 rounded-full"
+                style={{
+                  animationDelay: "1.5s",
+                  animation: "ping 0.5s cubic-bezier(0, 0, 0.2, 1) 1",
+                }}
               ></div>
             </div>
 
@@ -792,13 +813,12 @@ export default function ConfeitariaPremium() {
                   key={i}
                   className={`absolute w-1 h-1 sm:w-2 sm:h-2 ${
                     ["bg-yellow-400", "bg-pink-400", "bg-blue-400", "bg-green-400", "bg-red-400"][i % 5]
-                  } animate-bounce`}
+                  }`}
                   style={{
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
                     animationDelay: `${Math.random() * 0.5}s`,
-                    animationDuration: `2s`,
-                    animationIterationCount: "1",
+                    animation: `bounce 2s ease-in-out 1`,
                   }}
                 />
               ))}
@@ -807,14 +827,14 @@ export default function ConfeitariaPremium() {
         )}
 
         {/* Progress Bar */}
-        <div className="mt-8 border-2 border-yellow-500/30 rounded-lg p-4 bg-gray-900/50">
-          <div className="flex justify-between text-sm text-gray-400 mb-2">
+        <div className="mt-4 sm:mt-8 border-2 border-yellow-500/30 rounded-lg p-2 sm:p-4 bg-gray-900/50">
+          <div className="flex justify-between text-xs sm:text-sm text-gray-400 mb-1 sm:mb-2">
             <span>🎯 Progresso da Jornada</span>
             <span>{Math.round((currentStep / steps.length) * 100)}% Completo ✨</span>
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-3 border border-yellow-500/30">
+          <div className="w-full bg-gray-800 rounded-full h-2 sm:h-3 border border-yellow-500/30">
             <div
-              className="bg-gradient-to-r from-[#1877F2] to-yellow-400 h-3 rounded-full transition-all duration-500 shadow-lg"
+              className="bg-gradient-to-r from-[#1877F2] to-yellow-400 h-2 sm:h-3 rounded-full transition-all duration-500 shadow-lg"
               style={{ width: `${(currentStep / steps.length) * 100}%` }}
             />
           </div>
@@ -822,24 +842,24 @@ export default function ConfeitariaPremium() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black border-t-2 border-yellow-500 p-6 mt-12 shadow-lg shadow-yellow-500/20">
+      <footer className="bg-black border-t-2 border-yellow-500 p-3 sm:p-6 mt-6 sm:mt-12 shadow-lg shadow-yellow-500/20">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-8 h-8 bg-[#1877F2] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">f</span>
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2 sm:mb-4">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-[#1877F2] rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-xs sm:text-sm">f</span>
             </div>
-            <span className="text-[#1877F2] font-bold text-xl">Facebook</span>
-            <Sparkles className="w-6 h-6 text-yellow-400" />
+            <span className="text-[#1877F2] font-bold text-sm sm:text-xl">Facebook</span>
+            <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400" />
           </div>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-xs sm:text-lg">
             ✨ Confeitaria Premium™ - Transformando confeiteiras em empresárias de sucesso ✨
           </p>
-          <div className="mt-2 flex justify-center gap-2">
-            <Star className="w-4 h-4 text-yellow-400" />
-            <Star className="w-4 h-4 text-yellow-400" />
-            <Star className="w-4 h-4 text-yellow-400" />
-            <Star className="w-4 h-4 text-yellow-400" />
-            <Star className="w-4 h-4 text-yellow-400" />
+          <div className="mt-1 sm:mt-2 flex justify-center gap-1">
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
           </div>
         </div>
       </footer>
