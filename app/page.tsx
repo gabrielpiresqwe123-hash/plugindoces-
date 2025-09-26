@@ -615,7 +615,7 @@ export default function ConfeitariaPremium() {
                       key={index}
                       onClick={() => handleOptionSelect(option.text, option.feedback)}
                       variant="outline"
-                      className="w-full text-left p-2 sm:p-4 md:p-6 h-auto bg-gray-800 border-2 border-yellow-500/30 hover:bg-gray-700 hover:border-yellow-500 text-white transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20"
+                      className="w-full text-left p-2 sm:p-4 md:p-6 min-h-[60px] sm:min-h-[80px] h-auto bg-gray-800 border-2 border-yellow-500/30 hover:bg-gray-700 hover:border-yellow-500 text-white transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20"
                     >
                       <div className="flex items-start gap-2 sm:gap-3 w-full">
                         <div className="flex-shrink-0 mt-1">
@@ -623,9 +623,11 @@ export default function ConfeitariaPremium() {
                           {index === 1 && <Star className="w-3 h-3 sm:w-5 sm:h-5 text-yellow-400" />}
                           {index === 2 && <Zap className="w-3 h-3 sm:w-5 sm:h-5 text-blue-400" />}
                         </div>
-                        <span className="text-xs sm:text-sm md:text-base leading-relaxed break-words flex-1 hyphens-auto overflow-wrap-anywhere word-break-break-word">
-                          {option.text}
-                        </span>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs sm:text-sm md:text-base leading-relaxed break-words block hyphens-auto overflow-wrap-anywhere word-break-break-word max-w-full">
+                            {option.text}
+                          </span>
+                        </div>
                       </div>
                     </Button>
                   ))}
@@ -794,8 +796,10 @@ export default function ConfeitariaPremium() {
               <div
                 className="absolute top-32 left-1/4 w-1 h-1 sm:w-2 sm:h-2 bg-blue-400 rounded-full"
                 style={{
-                  animationDelay: "1s",
-                  animation: "ping 1s cubic-bezier(0, 0, 0.2, 1) 1",
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 0.5}s`,
+                  animation: `bounce 2s ease-in-out 1`,
                 }}
               ></div>
               <div
