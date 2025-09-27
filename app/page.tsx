@@ -67,9 +67,9 @@ A maioria nem tem coragem de clicar no botão, mas você já tá aqui.
   {
     id: 3,
     title: "Pergunta 1 – Ciclo da Estagnação",
-    content: `💭 **"{userName}, o que faz mais sentido pra você hoje?"**
+    content: `💭 **"{userName}, qual dessas situações faz mais sentido pra você hoje?"**
 
-🤔 Escolha com sabedoria, {userName}... sua resposta revela muito sobre seu futuro! ⭐`,
+🤔 Escolha com sabedoria, {userName}... sua resposta vai revelar muito sobre onde você está agora. ⭐`,
     options: [
       {
         text: "😴 Continuar no ciclo: noites viradas, desconto pra todo mundo e lucro que não paga nem o gás.",
@@ -91,7 +91,7 @@ A maioria nem tem coragem de clicar no botão, mas você já tá aqui.
   {
     id: 4,
     title: "Pergunta 2 – Tempo de Família",
-    content: `💝 **"{userName}, se você tivesse que escolher… o que pesa mais?"**
+    content: `💝 **"{userName}, se você tivesse que escolher entre essas duas realidades... o que pesa mais no seu coração?"**
 
 👨‍👩‍👧‍👦 Sua família está esperando por você, {userName}... ⭐`,
     options: [
@@ -117,7 +117,7 @@ A maioria nem tem coragem de clicar no botão, mas você já tá aqui.
     title: "Pergunta 3 – Futuro da Confeitaria",
     content: `🚀 **"{userName}, se nada mudar nos próximos 6 meses, onde você acha que vai estar?"**
 
-⏰ O tempo não para, {userName}... e você? ⭐`,
+⏰ O tempo não para, {userName}... e você? Vai ficar parada ou vai construir algo grande? ⭐`,
     options: [
       {
         text: "😰 Mais cansada, devendo, achando que confeitaria é só bico.",
@@ -162,7 +162,7 @@ Poucas chegam aqui, mas você já mostrou que tem visão de confeiteira premium.
     title: "🌟 Transformação Comprovada",
     content: `🔥 **MAIS DE 327 CONFEITEIRAS** já aplicaram essa estrutura secreta e hoje vivem de confeitaria premium sem se matar na cozinha, {userName}.
 
-💔 **ESSAS MULHERES ESTAVAM NA MESMA MERDA QUE VOCÊ:**
+💔 **ESSAS MULHERES ESTAVAM NA MESMA QUE VOCÊ:**
 ❌ Fazendo bolo madrugada inteira por mixaria
 ❌ Aceitando desconto de cliente folgado  
 ❌ Postando no Instagram e rezando por uma curtida
@@ -257,24 +257,6 @@ ou 7x de R$4,98 no cartão (menos que um café por dia ☕), {userName}.
 
 ✅ Garantia total de 7 dias — risco zero. Se não amar, devolvemos seu dinheiro.
 
-🚀 **AGORA É SUA VEZ**
-
-Não adianta sonhar em ser premium e continuar vendendo bolo barato, {userName}.
-
-👉 Esse relatório foi gerado exclusivamente com base nas suas respostas.
-
-Ele mostra exatamente onde você tá errando e o que precisa mudar pra se destacar na confeitaria.
-
-⚠️ **SE VOCÊ SAIR AGORA, PERDE ESSA OPORTUNIDADE ÚNICA:**
-
-📊 Acesso ao relatório personalizado só pra você.
-
-🎁 Todos os bônus exclusivos que foram liberados nessa condição.
-
-✨ A chance de aplicar o mesmo método que já transformou a vida de centenas de confeiteiras.
-
-⏳ Depois que fechar, não tem como voltar. O acesso expira, os bônus somem e você continua presa no mesmo ciclo cansativo de sempre.
-
 👑 A diferença entre ficar invisível ou ser lembrada como referência premium começa nesse clique, {userName}:`,
     isLong: true,
   },
@@ -300,7 +282,7 @@ export default function ConfeitariaPremium() {
   useEffect(() => {
     // Initialize audio elements
     buttonSoundRef.current = new Audio("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cashier-quotka-chingquot-sound-effect-129698-5Hd5YVkVR5rpd5DqNNFGJAsD4emLPs.mp3")
-    backgroundMusicRef.current = new Audio("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/curto%20rise-of-the-titans-281575-2_VUkidyxn-137MSaJM2NQlmlR96LfRcNr2jeGr4j.wav")
+    backgroundMusicRef.current = new Audio("https://blobs.vusercontent.net/blob/eltop%20%28online-audio-converter.com%29-P0JKUAjNXqBAyQ2xiqJLwMsXhO1c8D.wav")
     firstStepAudioRef.current = new Audio("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/clip-Ember-2025_09_15-xevbRLvjPco3iprLAiZxbjgTt6lqIH.wav")
     step6AudioRef.current = new Audio("https://blobs.vusercontent.net/blob/clip-Hem-2025_09_15-hAG9Ke3KN4Q3y0IK7Iz7O7lxXHAv16.wav")
 
@@ -324,9 +306,40 @@ export default function ConfeitariaPremium() {
 
   useEffect(() => {
     const currentStepData = steps.find((step) => step.id === currentStep)
-    if (currentStepData?.isLong) {
+
+    if (currentStep === 9 && backgroundMusicRef.current && musicStarted) {
+      try {
+        backgroundMusicRef.current.pause()
+        backgroundMusicRef.current.currentTime = 0
+      } catch (error) {
+        console.log("[v0] Background music stop error:", error)
+      }
+    }
+
+    if (currentStepData?.isLong && currentStep !== 1) {
       setIsTyping(true)
       setDisplayedText("")
+
+      const text = currentStepData.content.replace(/{userName}/g, userName || "")
+      let index = 0
+
+      const typeInterval = setInterval(
+        () => {
+          if (index < text.length) {
+            setDisplayedText(text.slice(0, index + 1))
+            index++
+          } else {
+            setIsTyping(false)
+            clearInterval(typeInterval)
+          }
+        },
+        currentStep === 7 ? 3 : currentStep === 8 ? 4 : currentStep === 9 ? 4 : 10,
+      )
+
+      return () => clearInterval(typeInterval)
+    } else {
+      setDisplayedText("")
+      setIsTyping(false)
 
       if (currentStep === 1 && firstStepAudioRef.current && !musicStarted) {
         try {
@@ -342,27 +355,6 @@ export default function ConfeitariaPremium() {
         }
       }
 
-      const text = currentStepData.content.replace(/{userName}/g, userName || "")
-      let index = 0
-
-      const typeInterval = setInterval(
-        () => {
-          if (index < text.length) {
-            setDisplayedText(text.slice(0, index + 1))
-            index++
-          } else {
-            setIsTyping(false)
-            clearInterval(typeInterval)
-          }
-        },
-        currentStep === 1 ? 8 : currentStep === 7 ? 5 : currentStep === 8 ? 6 : currentStep === 9 ? 6 : 15,
-      )
-
-      return () => clearInterval(typeInterval)
-    } else {
-      setDisplayedText("")
-      setIsTyping(false)
-
       if (currentStep === 6 && step6AudioRef.current) {
         try {
           step6AudioRef.current.currentTime = 0
@@ -377,28 +369,39 @@ export default function ConfeitariaPremium() {
         }
       }
     }
-  }, [currentStep]) // Removed userName dependency to prevent restarting animation
+  }, [currentStep, musicStarted])
 
   const playButtonSound = () => {
     if (buttonSoundRef.current) {
       try {
         buttonSoundRef.current.currentTime = 0
+        buttonSoundRef.current.volume = 0.7 // Increased volume
         const playPromise = buttonSoundRef.current.play()
         if (playPromise !== undefined) {
           playPromise.catch((error) => {
             console.log("[v0] Button sound play failed:", error)
-            // Silently fail - don't break the user experience
+            // Try to create a new audio instance if the first fails
+            try {
+              const newAudio = new Audio("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cashier-quotka-chingquot-sound-effect-129698-5Hd5YVkVR5rpd5DqNNFGJAsD4emLPs.mp3")
+              newAudio.volume = 0.7
+              newAudio.play().catch(() => {})
+            } catch {}
           })
         }
       } catch (error) {
         console.log("[v0] Button sound error:", error)
-        // Silently fail - don't break the user experience
+        // Fallback: try to create new audio instance
+        try {
+          const fallbackAudio = new Audio("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cashier-quotka-chingquot-sound-effect-129698-5Hd5YVkVR5rpd5DqNNFGJAsD4emLPs.mp3")
+          fallbackAudio.volume = 0.7
+          fallbackAudio.play().catch(() => {})
+        } catch {}
       }
     }
   }
 
   const startBackgroundMusic = () => {
-    if (backgroundMusicRef.current && !musicStarted) {
+    if (backgroundMusicRef.current && !musicStarted && currentStep === 1) {
       try {
         const playPromise = backgroundMusicRef.current.play()
         if (playPromise !== undefined) {
@@ -531,7 +534,7 @@ export default function ConfeitariaPremium() {
               {/* Content */}
               <div className="prose prose-invert max-w-none mb-4 sm:mb-8">
                 <div className="whitespace-pre-line text-xs sm:text-base md:text-lg leading-relaxed text-gray-100 break-words hyphens-auto overflow-wrap-anywhere px-2 sm:px-0">
-                  {currentStepData.isLong ? (
+                  {currentStepData.isLong && currentStep !== 1 ? (
                     <>
                       {displayedText}
                       {isTyping && <span className="animate-pulse">|</span>}
@@ -543,7 +546,7 @@ export default function ConfeitariaPremium() {
               </div>
 
               {/* Step 1 - Name Input */}
-              {currentStep === 1 && !isTyping && (
+              {currentStep === 1 && (
                 <div className="space-y-4 sm:space-y-6 border-2 border-yellow-500/30 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-gray-800/50 to-gray-700/50">
                   <div className="text-center mb-2 sm:mb-4">
                     <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500 mx-auto animate-pulse" />
@@ -564,7 +567,7 @@ export default function ConfeitariaPremium() {
                   <Button
                     onClick={handleNextStep}
                     disabled={userName.trim().length < 2}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-3 sm:py-6 text-sm sm:text-xl border-2 border-pink-400 shadow-lg hover:shadow-pink-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-3 sm:py-6 text-sm sm:text-xl border-2 border-pink-400 shadow-lg hover:shadow-pink-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     🍓 QUERO DESCOBRIR AGORA ✨
                   </Button>
@@ -573,40 +576,50 @@ export default function ConfeitariaPremium() {
 
               {/* Options for question steps */}
               {currentStepData.options && !showFeedback && (
-                <div className="space-y-2 sm:space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {/* Improved mobile layout for chef animations */}
                   {currentStep === 3 && (
-                    <div className="text-center mb-3 sm:mb-6">
+                    <div className="text-center mb-4 sm:mb-6">
                       <div className="relative inline-block">
-                        <div className="w-12 h-12 sm:w-20 sm:h-20 mx-auto mb-2 sm:mb-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-4 border-yellow-300 shadow-2xl animate-pulse">
-                          <span className="text-lg sm:text-3xl">👩‍🍳</span>
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center border-4 border-yellow-300 shadow-2xl animate-pulse">
+                          <span className="text-2xl sm:text-3xl">👩‍🍳</span>
                         </div>
-                        <div className="absolute -top-1 -right-1 w-4 h-4 sm:w-8 sm:h-8 bg-red-500 rounded-full flex items-center justify-center animate-bounce">
-                          <span className="text-white text-xs font-bold">🔥</span>
+                        <div className="absolute -top-1 -right-1 w-6 h-6 sm:w-8 sm:h-8 bg-red-500 rounded-full flex items-center justify-center animate-bounce">
+                          <span className="text-white text-sm font-bold">🔥</span>
                         </div>
                       </div>
-                      <div className="text-yellow-400 font-bold text-xs sm:text-lg mb-1 sm:mb-2">
-                        ⚡ CHEF PREMIUM MODE ⚡
-                      </div>
+                      <div className="text-yellow-400 font-bold text-sm sm:text-lg mb-2">⚡ CHEF PREMIUM MODE ⚡</div>
                     </div>
                   )}
 
                   {currentStep === 4 && (
-                    <div className="text-center mb-3 sm:mb-6">
+                    <div className="text-center mb-4 sm:mb-6">
                       <div className="relative inline-block">
-                        <div className="w-12 h-12 sm:w-20 sm:h-20 mx-auto mb-2 sm:mb-4 bg-gradient-to-br from-pink-400 to-red-500 rounded-full flex items-center justify-center border-4 border-pink-300 shadow-2xl animate-pulse">
-                          <span className="text-lg sm:text-3xl">🍰</span>
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-pink-400 to-red-500 rounded-full flex items-center justify-center border-4 border-pink-300 shadow-2xl animate-pulse">
+                          <span className="text-2xl sm:text-3xl">🍰</span>
                         </div>
-                        <div className="absolute -top-1 -left-1 w-3 h-3 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center animate-spin">
+                        <div className="absolute -top-1 -left-1 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center animate-spin">
                           <span className="text-white text-xs">⭐</span>
                         </div>
-                        <div className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
                           <span className="text-white text-xs">💎</span>
                         </div>
                       </div>
-                      <div className="text-pink-400 font-bold text-xs sm:text-lg mb-1 sm:mb-2">
-                        🍰 FAMÍLIA & CONFEITARIA 🍰
+                      <div className="text-pink-400 font-bold text-sm sm:text-lg mb-2">🍰 FAMÍLIA & CONFEITARIA 🍰</div>
+                    </div>
+                  )}
+
+                  {currentStep === 5 && (
+                    <div className="text-center mb-4 sm:mb-6">
+                      <div className="relative inline-block">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center border-4 border-purple-300 shadow-2xl animate-pulse">
+                          <span className="text-2xl sm:text-3xl">🚀</span>
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center animate-spin">
+                          <span className="text-white text-xs">⭐</span>
+                        </div>
                       </div>
+                      <div className="text-purple-400 font-bold text-sm sm:text-lg mb-2">🚀 FUTURO PREMIUM 🚀</div>
                     </div>
                   )}
 
@@ -615,16 +628,16 @@ export default function ConfeitariaPremium() {
                       key={index}
                       onClick={() => handleOptionSelect(option.text, option.feedback)}
                       variant="outline"
-                      className="w-full text-left p-2 sm:p-4 md:p-6 min-h-[60px] sm:min-h-[80px] h-auto bg-gray-800 border-2 border-yellow-500/30 hover:bg-gray-700 hover:border-yellow-500 text-white transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20"
+                      className="w-full text-left p-4 sm:p-6 min-h-[120px] sm:min-h-[140px] bg-gray-800 border-2 border-yellow-500/30 hover:bg-gray-700 hover:border-yellow-500 text-white transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/20"
                     >
-                      <div className="flex items-start gap-2 sm:gap-3 w-full">
+                      <div className="flex items-start gap-3 sm:gap-4 w-full h-full">
                         <div className="flex-shrink-0 mt-1">
-                          {index === 0 && <Target className="w-3 h-3 sm:w-5 sm:h-5 text-red-400" />}
-                          {index === 1 && <Star className="w-3 h-3 sm:w-5 sm:h-5 text-yellow-400" />}
-                          {index === 2 && <Zap className="w-3 h-3 sm:w-5 sm:h-5 text-blue-400" />}
+                          {index === 0 && <Target className="w-5 h-5 sm:w-6 sm:h-6 text-red-400" />}
+                          {index === 1 && <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />}
+                          {index === 2 && <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-xs sm:text-sm md:text-base leading-relaxed break-words block hyphens-auto overflow-wrap-anywhere word-break-break-word max-w-full">
+                        <div className="flex-1 min-w-0 flex items-center h-full">
+                          <span className="text-sm sm:text-base leading-relaxed break-words hyphens-auto overflow-wrap-anywhere word-break-break-word max-w-full text-left">
                             {option.text}
                           </span>
                         </div>
@@ -636,11 +649,11 @@ export default function ConfeitariaPremium() {
 
               {/* Feedback */}
               {showFeedback && selectedOption && (
-                <div className="space-y-3 sm:space-y-6">
-                  <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-2 sm:p-4 md:p-6 rounded-lg border-l-4 border-[#1877F2] border-2 border-yellow-500/30 shadow-lg">
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400 flex-shrink-0 mt-1" />
-                      <p className="text-xs sm:text-sm md:text-lg leading-relaxed text-gray-100 break-words flex-1 hyphens-auto overflow-wrap-anywhere word-break-break-word">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-4 sm:p-6 rounded-lg border-l-4 border-[#1877F2] border-2 border-yellow-500/30 shadow-lg">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 flex-shrink-0 mt-1" />
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-100 break-words flex-1 hyphens-auto overflow-wrap-anywhere word-break-break-word max-w-full">
                         {currentStepData.options
                           ?.find((opt) => opt.text === selectedOption)
                           ?.feedback.replace(/{userName}/g, userName || "")}
@@ -649,7 +662,7 @@ export default function ConfeitariaPremium() {
                   </div>
                   <Button
                     onClick={handleNextStep}
-                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 sm:py-6 px-2 sm:px-8 text-sm sm:text-xl border-2 border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 sm:py-6 px-4 sm:px-8 text-sm sm:text-xl border-2 border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-all duration-300"
                   >
                     🚀 CONTINUAR JORNADA ✨
                   </Button>
@@ -660,7 +673,7 @@ export default function ConfeitariaPremium() {
               {currentStepData.isPopup && (
                 <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10">
                   <div className="mb-2 sm:mb-4">
-                    <Crown className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-500 mx-auto animate-bounce" />
+                    <Crown className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-500 animate-bounce" />
                   </div>
                   <Button
                     onClick={handleNextStep}
@@ -673,76 +686,108 @@ export default function ConfeitariaPremium() {
 
               {/* Step 7 - Final CTA */}
               {currentStep === 7 && !isTyping && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
-                  <div className="mb-2 sm:mb-4">
-                    <div className="flex justify-center gap-1 sm:gap-2">
-                      <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
-                      <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
-                      <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
-                    </div>
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="text-center mb-4 sm:mb-6">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full max-w-md mx-auto rounded-lg border-2 border-yellow-500 shadow-2xl shadow-yellow-500/30"
+                    >
+                      <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/video-yBGM5t8vX5d5wJt6zpqXcWhPBGGZhK.mp4" type="video/mp4" />
+                      Seu navegador não suporta vídeo.
+                    </video>
                   </div>
-                  <Button
-                    onClick={handleNextStep}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
-                  >
-                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
-                      🍓 QUERO VIVER DA CONFEITARIA PREMIUM ✨
-                    </span>
-                  </Button>
+
+                  <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
+                    <div className="mb-2 sm:mb-4">
+                      <div className="flex justify-center gap-1 sm:gap-2">
+                        <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                        <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
+                        <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+                      </div>
+                    </div>
+                    <Button
+                      onClick={handleNextStep}
+                      className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    >
+                      <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
+                        🍓 QUERO VIVER DA CONFEITARIA PREMIUM ✨
+                      </span>
+                    </Button>
+                  </div>
                 </div>
               )}
 
               {/* Step 8 - Final Celebration */}
               {currentStep === 8 && !isTyping && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
-                  <div className="mb-3 sm:mb-6">
-                    <div className="flex justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
-                      <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
-                      <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
-                      <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
-                    </div>
-                    <div className="text-lg sm:text-2xl mb-2 sm:mb-4">🎉🎁🎊</div>
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="text-center mb-4 sm:mb-6">
+                    <img
+                      src="/confeitaria-sales.png"
+                      alt="Confeiteira Premium com Vendas Automáticas"
+                      className="w-full max-w-md mx-auto rounded-lg border-2 border-yellow-500 shadow-2xl shadow-yellow-500/30"
+                    />
                   </div>
-                  <Button
-                    onClick={handleNextStep}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
-                  >
-                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
-                      🍓 ACESSAR MEU RELATÓRIO E MÉTODO PREMIUM ✨
-                    </span>
-                  </Button>
+
+                  <div className="text-center mb-4 sm:mb-6"></div>
+
+                  <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
+                    <div className="mb-3 sm:mb-6">
+                      <div className="flex justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
+                        <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                        <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
+                        <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+                      </div>
+                      <div className="text-lg sm:text-2xl mb-2 sm:mb-4">🎉🎁🎊</div>
+                    </div>
+                    <Button
+                      onClick={handleNextStep}
+                      className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    >
+                      <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
+                        🍓 ACESSAR MEU RELATÓRIO E MÉTODO PREMIUM ✨
+                      </span>
+                    </Button>
+                  </div>
                 </div>
               )}
 
               {/* Step 9 - Final Celebration */}
               {currentStep === 9 && !isTyping && (
-                <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
-                  <div className="mb-4 sm:mb-8">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="text-center mb-4 sm:mb-8">
                     <img
-                      src="/confeitaria-premium-final.png"
+                      src="/confeitaria-methods.png"
                       alt="Método Confeitaria Premium - Transformação Completa"
                       className="w-full max-w-xs sm:max-w-lg mx-auto rounded-lg border-2 border-yellow-500 shadow-2xl shadow-yellow-500/30"
                     />
                   </div>
-                  <div className="mb-3 sm:mb-6">
-                    <div className="flex justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
-                      <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
-                      <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
-                      <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+
+                  <div className="text-center mb-4 sm:mb-6"></div>
+
+                  <div className="text-center border-2 border-yellow-500 rounded-lg p-3 sm:p-6 bg-gradient-to-r from-pink-500/10 to-red-500/10">
+                    <div className="mb-3 sm:mb-6">
+                      <div className="flex justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
+                        <Crown className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-500 animate-pulse" />
+                        <Heart className="w-4 h-4 sm:w-8 sm:h-8 text-pink-500 animate-pulse" />
+                        <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+                      </div>
+                      <div className="text-lg sm:text-2xl mb-2 sm:mb-4">🎉🎁🎊</div>
                     </div>
-                    <div className="text-lg sm:text-2xl mb-2 sm:mb-4">🎉🎁🎊</div>
+                    <Button
+                      onClick={() => {
+                        playButtonSound()
+                        window.open("https://pay.kiwify.com.br/yHioiZU", "_blank")
+                      }}
+                      className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    >
+                      <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
+                        🍓 ACESSAR MEU RELATÓRIO E MÉTODO PREMIUM ✨
+                      </span>
+                    </Button>
                   </div>
-                  <Button
-                    onClick={() => {
-                      playButtonSound()
-                      window.open("https://pay.kiwify.com.br/yHioiZU", "_blank")
-                    }}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 sm:py-8 px-1 sm:px-8 border-2 border-pink-400 shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
-                  >
-                    <span className="text-xs sm:text-sm md:text-lg lg:text-xl leading-tight break-words hyphens-auto">
-                      🍓 ACESSAR MEU RELATÓRIO E MÉTODO PREMIUM ✨
-                    </span>
-                  </Button>
                 </div>
               )}
 
@@ -777,20 +822,29 @@ export default function ConfeitariaPremium() {
             <div
               className="fixed inset-0 pointer-events-none z-40"
               style={{
-                animation: "pulse 2s ease-in-out 1",
+                animationName: "pulse",
+                animationDuration: "2s",
+                animationTimingFunction: "ease-in-out",
+                animationIterationCount: "1",
               }}
             >
               <div
                 className="absolute top-10 left-10 w-2 h-2 sm:w-4 sm:h-4 bg-yellow-400 rounded-full"
                 style={{
-                  animation: "ping 2s cubic-bezier(0, 0, 0.2, 1) 1",
+                  animationName: "ping",
+                  animationDuration: "2s",
+                  animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+                  animationIterationCount: "1",
                 }}
               ></div>
               <div
                 className="absolute top-20 right-20 w-1 h-1 sm:w-3 sm:h-3 bg-red-400 rounded-full"
                 style={{
                   animationDelay: "0.5s",
-                  animation: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) 1",
+                  animationName: "ping",
+                  animationDuration: "1.5s",
+                  animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+                  animationIterationCount: "1",
                 }}
               ></div>
               <div
@@ -799,20 +853,26 @@ export default function ConfeitariaPremium() {
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
                   animationDelay: `${Math.random() * 0.5}s`,
-                  animation: `bounce 2s ease-in-out 1`,
+                  animationName: "bounce",
+                  animationDuration: "2s",
+                  animationTimingFunction: "ease-in-out",
+                  animationIterationCount: "1",
                 }}
               ></div>
               <div
                 className="absolute top-16 right-1/3 w-1 h-1 sm:w-3 sm:h-3 bg-green-400 rounded-full"
                 style={{
                   animationDelay: "1.5s",
-                  animation: "ping 0.5s cubic-bezier(0, 0, 0.2, 1) 1",
+                  animationName: "ping",
+                  animationDuration: "0.5s",
+                  animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+                  animationIterationCount: "1",
                 }}
               ></div>
             </div>
 
             <div className="fixed inset-0 pointer-events-none z-30">
-              {[...Array(15)].map((_, i) => (
+              {[...Array(8)].map((_, i) => (
                 <div
                   key={i}
                   className={`absolute w-1 h-1 sm:w-2 sm:h-2 ${
@@ -822,7 +882,10 @@ export default function ConfeitariaPremium() {
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
                     animationDelay: `${Math.random() * 0.5}s`,
-                    animation: `bounce 2s ease-in-out 1`,
+                    animationName: "bounce",
+                    animationDuration: "2s",
+                    animationTimingFunction: "ease-in-out",
+                    animationIterationCount: "1",
                   }}
                 />
               ))}
